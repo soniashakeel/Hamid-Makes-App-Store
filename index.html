@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0f14">
+<title>Hamid Makes App Store</title>
+
+<!-- Browser Tab Icon -->
+<link rel="icon" type="image/png" href="logo.png">
+
+<style>
+/* Dynamic Theme Variables */
+:root {
+  --bg: #080b10;
+  --card: #111823;
+  --line: #263242;
+  --text: #f5f7fb;
+  --muted: #9aa8b8;
+  --accent: #5df29a; /* Default Green Accent */
+  --yt-red: #ff0000;
+}
+
+/* Theme Options */
+body.theme-blue { --accent: #00d2ff; }
+body.theme-red { --accent: #ff4757; }
+body.theme-gold { --accent: #eccc68; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #14251f 0, #080b10 45%);
+  color: var(--text);
+  font-family: Arial, system-ui, sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Header & Navigation */
+header {
+  padding: 28px 18px 20px;
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: center; gap: 13px; }
+
+.brand-logo-img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+h1 { font-size: clamp(25px, 5vw, 42px); margin: 0; letter-spacing: -1px; }
+p { color: var(--muted); margin: 6px 0 0; }
+
+nav { display: flex; gap: 10px; align-items: center; }
+nav a, .settings-btn {
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+nav a:hover, .settings-btn:hover { border-color: var(--accent); }
+
+/* Main Content */
+main { max-width: 1100px; margin: auto; padding: 20px 18px 60px; }
+
+.hero { padding: 28px 0 34px; max-width: 700px; }
+.hero h2 { font-size: clamp(30px, 7vw, 56px); line-height: 1.05; margin: 0 0 12px; }
+.hero strong { color: var(--accent); }
+
+/* App Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 18px;
+}
+
+.game {
+  background: linear-gradient(180deg, #151e2a, #0e141d);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cover {
+  height: 150px;
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.brick { background: linear-gradient(135deg, #4b241f, #a94b35); }
+.flappy { background: linear-gradient(135deg, #204d7a, #6bc4ee); }
+.ludo { background: linear-gradient(135deg, #563b93, #b66cf0); }
+
+.body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.body h3 { font-size: 21px; margin: 0; }
+.meta { font-size: 13px; color: var(--muted); }
+
+.actions { display: flex; gap: 9px; margin-top: auto; padding-top: 8px; }
+
+.btn {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 11px;
+  padding: 11px 8px;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: #18212d;
+  cursor: pointer;
+}
+
+.btn.primary { background: var(--accent); color: #07120b; border-color: var(--accent); }
+.btn.disabled { opacity: .45; pointer-events: none; }
+
+.notice {
+  margin: 24px 0;
+  padding: 15px 17px;
+  border: 1px dashed var(--line);
+  border-radius: 15px;
+  color: #b9c9c0;
+  background: #0d1913;
+  font-size: 14px;
+}
+
+/* About Section & Personal Image */
+.about-section {
+  margin-top: 50px;
+  padding: 28px;
+  background: linear-gradient(180deg, #111823, #0b0f14);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.user-profile-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.about-details { flex: 1; }
+.about-details h2 { margin: 0 0 10px 0; font-size: 28px; color: var(--accent); }
+
+.youtube-card {
+  margin-top: 25px;
+  padding: 24px;
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px solid var(--yt-red);
+  border-radius: 18px;
+  text-align: center;
+}
+
+.youtube-card h3 { margin: 0 0 10px 0; color: #fff; font-size: 22px; }
+.youtube-card p { margin-bottom: 20px; color: var(--muted); }
+
+.yt-sub-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--yt-red);
+  color: white;
+  padding: 13px 26px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.yt-sub-btn:hover { transform: translateY(-2px); background-color: #e60000; }
+
+/* Settings Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.theme-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.theme-btn {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #18212d;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding: 25px 18px;
+  font-size: 14px;
+  margin-top: 40px;
+}
+
+@media(max-width: 520px) {
+  header { align-items: flex-start; }
+  .about-container { flex-direction: column; text-align: center; }
+  .actions { flex-direction: column; }
+  .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="logo.png" alt="Hamid Makes Logo" class="brand-logo-img">
+    <div>
+      <h1>Hamid Makes</h1>
+      <p>App Store • Made in Pakistan 🇵🇰</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#games">All Games</a>
+    <a href="#about">About Us</a>
+    <button class="settings-btn" onclick="openSettings()">⚙️ Settings</button>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <h2>Your games.<br><strong>One store.</strong></h2>
+  <p>Download Hamid Makes APK games or play their web versions directly in your browser.</p>
+</section>
+
+<section id="games" class="grid">
+  <article class="game">
+    <div class="cover brick">BRICK<br>BREAKER</div>
+    <div class="body">
+      <h3>Brick Breaker</h3>
+      <div class="meta">Arcade • Android APK</div>
+      <p>Break the bricks, clear the board and beat your high score.</p>
+      <div class="actions">
+        <a class="btn primary" href="MCE_Brick_Breaker_v1.0.0_1781423880272.apk" download>Download APK</a>
+        <a class="btn disabled" href="#" aria-disabled="true">Play in Web</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="game">
+    <div class="cover flappy">FLAPPY<br>BIRD</div>
+    <div class="body">
+      <h3>Flappy Bird</h3>
+      <div class="meta">Casual • Android APK</div>
+      <p>Tap to fly through the pipes and set a new record.</p>
+      <div class="actions">
+        <a class="btn primary" href="MCE_Flappy_Bird_v1.0.0_1781423980680.apk" download>Download APK</a>
+        <a class="btn disabled" href="#" aria-disabled="true">Play in Web</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="game">
+    <div class="cover ludo">LUDO<br>MASTER</div>
+    <div class="body">
+      <h3>Ludo Master</h3>
+      <div class="meta">Board Game • Android APK</div>
+      <p>Roll the dice, move your tokens and become the Ludo master.</p>
+      <div class="actions">
+        <a class="btn primary" href="MCE_Ludo_Master_v1.0.0_1781708723074.apk" download>Download APK</a>
+        <a class="btn disabled" href="#" aria-disabled="true">Play in Web</a>
+      </div>
+    </div>
+  </article>
+</section>
+
+<div class="notice">Web versions are marked “coming soon” until the playable HTML game files are added. APK download buttons are ready.</div>
+
+<!-- About Us & Personal Image Section -->
+<section id="about" class="about-section">
+  <div class="about-container">
+    <!-- User Profile Image -->
+    <img src="user.png" alt="Hamid Profile" class="user-profile-img">
+    <div class="about-details">
+      <h2>About Me</h2>
+      <p>Welcome to <strong>Hamid Makes App Store</strong>! Main custom Android games aur software applications create karta hoon. Yahan aap mere saare latest projects direct free download kar sakte hain.</p>
+    </div>
+  </div>
+
+  <div class="youtube-card">
+    <h3>📺 Subscribe on YouTube</h3>
+    <p>Hamare official YouTube channel par programming tutorials, game development updates aur exclusive demos dekhein!</p>
+    <a href="https://www.youtube.com/@Hamid-z5s5m?sub_confirmation=1" target="_blank" class="yt-sub-btn">
+      🔴 Subscribe Us on YouTube
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- Settings Modal Window -->
+<div id="settingsModal" class="modal">
+  <div class="modal-content">
+    <h3>🎨 Choose Accent Theme</h3>
+    <div class="theme-options">
+      <button class="theme-btn" style="color: #5df29a;" onclick="setTheme('green')">Neon Green</button>
+      <button class="theme-btn" style="color: #00d2ff;" onclick="setTheme('blue')">Cyber Blue</button>
+      <button class="theme-btn" style="color: #ff4757;" onclick="setTheme('red')">Dark Red</button>
+      <button class="theme-btn" style="color: #eccc68;" onclick="setTheme('gold')">Gold Matrix</button>
+    </div>
+    <button class="btn primary" onclick="closeSettings()" style="width: 100%;">Close</button>
+  </div>
+</div>
+
+<footer>© 2026 Hamid Makes • Made by Hamid • Made in Pakistan</footer>
+
+<script>
+// Settings Modal Functions
+function openSettings() {
+  document.getElementById('settingsModal').style.display = 'flex';
+}
+
+function closeSettings() {
+  document.getElementById('settingsModal').style.display = 'none';
+}
+
+// Theme Switching Function
+function setTheme(theme) {
+  document.body.className = '';
+  if (theme !== 'green') {
+    document.body.classList.add('theme-' + theme);
+  }
+  localStorage.setItem('selectedTheme', theme);
+}
+
+// Saved Theme Persistence Load
+window.onload = function() {
+  const savedTheme = localStorage.getItem('selectedTheme');
+  if (savedTheme) {
+    setTheme(savedTheme);
+  }
+};
+</script>
+
+</body>
+</html>
